@@ -1,3 +1,7 @@
-from pessoa import Pessoa
-import pessoa
-import scraping
+from scraping import get_data
+from database import *
+ 
+products = get_data()
+
+for product in products:
+    product.show()
