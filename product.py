@@ -4,9 +4,8 @@ class Product():
         self.name = name
         self.price = price
         
-        
     def show(self):
-        print('Departament: {}, Name: {}, Price = {}.'.format(self.departament.name, self.name, self.price))
+        print('Departament: {} | Name: {} | Price = R${}.'.format(self.departament.name, self.name, self.price))
     
 class Department():
     def __init__(self, name, link):
@@ -14,4 +13,4 @@ class Department():
         self.link = link
     
     def show(self):
-        print('Departament: {}'.format(self.name))
+        print('Departament: {}.'.format(self.name))

@@ -1,11 +1,12 @@
 from bs4 import BeautifulSoup
 from time import sleep
-from prod import *
+from product import *
 from requests import get
+from csv import writer
 
 def get_products(departament, products):
-    sleep(3)
     url = departament.link
+    sleep(2)
     page = get(url)
     soup = BeautifulSoup(page.content,'html.parser')
     li = soup.find_all('ol', class_="items_container")[0].find_all('li')
@@ -29,6 +30,13 @@ def get_products(departament, products):
         
     return products
 
+def get_csv(products):
+    with open('products.csv', 'w') as file:
+        csvwriter = writer(file)
+        csvwriter.writerow(['Name','Price','Departament name'])
+        for product in products:
+            csvwriter.writerow([product.name, str(product.price), product.departament.name])
+
 def get_data():
     url = "https://www.mercadolivre.com.br/ofertas#nav-header"
     page = get(url)
@@ -48,8 +56,13 @@ def get_data():
 
     products = []
 
+    print('Scraping departaments...\n')
+    
     for departament in departaments:
         get_products(departament, products)
         departament.show()
     
-    return products
+    get_csv(products)
+    
+    return products, departaments
+

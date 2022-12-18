@@ -4,4 +4,4 @@ from database import *
 products = get_data()
 
 for product in products:
-    product.show()
+    insert_product(product)
