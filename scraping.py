@@ -31,7 +31,7 @@ def get_products(departament, products):
     return products
 
 def get_csv(products):
-    with open('products.csv', 'w') as file:
+    with open('products.csv', 'w', newline='') as file:
         csvwriter = writer(file)
         csvwriter.writerow(['Name','Price','Departament name'])
         for product in products:
